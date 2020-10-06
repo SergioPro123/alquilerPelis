@@ -3577,11 +3577,20 @@ a {
     -moz-transition: all 0.3s ease-out;
     -o-transition: all 0.3s ease-out;
     transition: all 0.3s ease-out;
-    color: #666;
+
     border-bottom: 1px solid dotted;
 }
 a:hover {
     color: #020d18;
+}
+
+a.delete {
+    color: #ff0000;
+}
+
+a.edit {
+    color: #28a745;
+    margin-right: 20px;
 }
 p {
     margin-bottom: 10px;
@@ -3736,6 +3745,7 @@ table {
     /* Prevents HTML tables from becoming too wide */
     width: 100%;
 }
+
 caption,
 th,
 td {
@@ -5474,7 +5484,7 @@ ul {
     height: 445px;
 }
 .hero .hero-ct {
-    padding-top: 170px;
+    padding-top: 40px;
 }
 .hero h1 {
     font-family: 'Dosis', sans-serif;
@@ -5525,7 +5535,7 @@ ul {
     height: 538px;
 }
 .common-hero {
-    height: 385px;
+    height: 200px;
     background: url('../images/uploads/user-hero-bg.jpg') no-repeat;
 }
 .common-hero:before {

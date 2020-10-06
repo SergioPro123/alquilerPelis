@@ -15,8 +15,11 @@
 	<meta name="format-detection" content="telephone-no">
 
 	<!-- CSS files -->
-	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4-4.1.1/dt-1.10.22/datatables.min.css"/>
- <link rel="stylesheet" href="css/gestionPeli.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4-4.1.1/dt-1.10.22/datatables.min.css"/>
+    <link rel="stylesheet" href="css/gestionPeli.css">
  
 
 </head>
@@ -30,44 +33,8 @@
     </div>
 </div>
 <!--end of preloading-->
-<!--signup form popup-->
-<div class="login-wrapper"  id="signup-content">
-    <div class="login-content">
-        <a href="#" class="close">x</a>
-        <h3>sign up</h3>
-        <form method="post" action="#">
-            <div class="row">
-                 <label for="username-2">
-                    Username:
-                    <input type="text" name="username" id="username-2" placeholder="Hugh Jackman" pattern="^[a-zA-Z][a-zA-Z0-9-_\.]{8,20}$" required="required" />
-                </label>
-            </div>
-           
-            <div class="row">
-                <label for="email-2">
-                    your email:
-                    <input type="password" name="email" id="email-2" placeholder="" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" required="required" />
-                </label>
-            </div>
-             <div class="row">
-                <label for="password-2">
-                    Password:
-                    <input type="password" name="password" id="password-2" placeholder="" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" required="required" />
-                </label>
-            </div>
-             <div class="row">
-                <label for="repassword-2">
-                    re-type Password:
-                    <input type="password" name="password" id="repassword-2" placeholder="" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" required="required" />
-                </label>
-            </div>
-           <div class="row">
-             <button type="submit">sign up</button>
-           </div>
-        </form>
-    </div>
-</div>
-<!--end of signup form popup-->
+
+
 
 <div class="hero common-hero">
 	<div class="container">
@@ -88,21 +55,44 @@
 
 <div class="page-single">
 	<div class="container">
+    <div class="row">
+        <form class="form-style-1 col-12" action="#">
+                                <div class="row">
+                                    <div class="col-12 ">
+                                        <input class="submit" id="anadirPelicula" type="submit" value="Añadir Pelicula" style="cursor: pointer;">
+                                    </div>
+                                </div>
+        </form>
+    </div>
 		<table  id="pelis" class="table">
 					<thead>
 						<tr class="">
-							<th><label>JAJAJJAJA</label></th>
-							<th><label>JAJAJJAJA</label></th>
-							<th><label>JAJAJJAJA</label></th>
+							<th>Nombre</th>
+							<th>Categoria</th>
+							<th>Precio Dia</th>
+							<th>Precio Dia</th>
+							<th>Multa Dia</th>
+							<th>Calificación</th>
+							<th>Acción</th>
+
 						</tr>
 					</thead>
 					
 					<tbody>
 					<?php for($i=0; $i<15 ; $i++) { ?>
 						<tr>
-							<td>JAJAJJAJA</td>
-							<td>JAJAJJAJA</td>
-							<td>JAJAJJAJA</td>
+							<td>Prueba 123</td>
+							<td>Prueba 123</td>
+							<td>Prueba 123</td>
+							<td>Prueba 123</td>
+							<td>Prueba 123</td>
+							<td>Prueba 123</td>
+							<td >
+							<a href='editarPelicula' class='edit' data-toggle='modal'><i
+										class='material-icons' data-toggle='tooltip' title='Editar'>&#xE254;</i></a>
+							<a href='eliminarPelicula' class='delete' data-toggle='modal' data-target="#danger-header-modal"><i class='material-icons' data-toggle='tooltip' title='Eliminar'>&#xE872;</i></a>
+							</td>
+
 						</tr>
 						<?php } ?>
 					</tbody>	
@@ -119,14 +109,149 @@
 		</div>
 	</div>
 </footer>
+<!-- Modal Confirmacion de eliminar -->
+<div class="login-wrapper"  id="modalEliminarPelicula">
+    <div class="login-content">
+        <a href="#" class="close">x</a>
+        <h3 class="m-0">Eliminar Pelicula</h3>
+        <form method="post" action="#">
+            <div class="row">
+                 <p>¿Desea Eliminar la Pelicula?</p>
+            </div>
+           <div class="row">
+             <button type="submit">Eliminar</button>
+           </div>
+        </form>
+    </div>
+</div>
+<!-- FIN Modal Confirmacion de eliminar -->
+
+<!--Modal Añadir Pelicula-->
+<div class="login-wrapper"  id="modalAnadirPelicula">
+    <div class="login-content">
+        <a href="#" class="close">x</a>
+        <h3>Añadir Pelicula</h3>
+        <form method="post" action="#">
+            <div class="row">
+                 <label for="nombre" class="col-9 pl-0">
+                    Nombre:
+                    <input type="text" name="nombre" id="nombre" placeholder="" pattern="^[a-zA-Z][a-zA-Z0-9-_\.]{8,20}$" required="required" />
+                </label>
+                <label for="anio" class="col-3 pl-15 pr-0   ">
+                    Año:
+                    <input type="number" name="anio" id="anio" placeholder="" required="required" minlength="0" maxlength="4"/>
+                </label>
+            </div>
+            <div class="row">
+                <label for="descripcion">
+                    Descripcion:
+                    <textarea  name="descripcion" id="descripcion" placeholder=""  rows="2">
+                    </textarea>
+                </label>
+            </div>
+             <div class="row">
+                <label for="calificacion" class="col-3 pl-0">
+                    Calificación:
+                    <input type="number" min="0" max="10" name="calificacion" id="calificacion" placeholder="" required="required" />
+                </label>
+                <label for="calificacion" class="col-9 pl-15 pr-0 ">
+                    Categoria:
+                    <select  name="calificacion" id="calificacion" required="required" class="mt-3">
+                        <option value="terror">Terror</option>
+                    </select>
+                </label>
+            </div>
+            <div class="row">
+                <label for="precioDia" class="col-6 pl-0">
+                    Precio por Día:
+                    <input type="number" name="precioDia" id="precioDia" placeholder="" required="required" />
+                </label>
+                <label for="multaDia" class="col-6 pl-15 pr-0   ">
+                    Multa por Día:
+                    <input type="number" name="multaDia" id="multaDia" placeholder="" required="required" />
+                </label>
+            </div>
+             <div class="row">
+                <label for="image" class="col pl-0">
+                    Imagen:
+                    <input type="file" accept="image/*" name="password" id="image" placeholder="" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" required="required" />
+                </label>
+            </div>
+           <div class="row">
+             <button type="submit">Enviar</button>
+           </div>
+        </form>
+    </div>
+</div>
+<!--fin Modal Añadir Pelicula-->
+
+<!--Modal Editar Pelicula-->
+<div class="login-wrapper"  id="modalEditarPelicula">
+    <div class="login-content">
+        <a href="#" class="close">x</a>
+        <h3>Editar Pelicula</h3>
+        <form method="post" action="#">
+            <div class="row">
+                 <label for="nombre" class="col-9 pl-0">
+                    Nombre:
+                    <input type="text" name="nombre" id="nombre" placeholder="" pattern="^[a-zA-Z][a-zA-Z0-9-_\.]{8,20}$" required="required" />
+                </label>
+                <label for="anio" class="col-3 pl-15 pr-0   ">
+                    Año:
+                    <input type="number" name="anio" id="anio" placeholder="" required="required" minlength="0" maxlength="4"/>
+                </label>
+            </div>
+            <div class="row">
+                <label for="descripcion">
+                    Descripcion:
+                    <textarea  name="descripcion" id="descripcion" placeholder=""  rows="2">
+                    </textarea>
+                </label>
+            </div>
+             <div class="row">
+                <label for="calificacion" class="col-3 pl-0">
+                    Calificación:
+                    <input type="number" min="0" max="10" name="calificacion" id="calificacion" placeholder="" required="required" />
+                </label>
+                <label for="calificacion" class="col-9 pl-15 pr-0 ">
+                    Categoria:
+                    <select  name="calificacion" id="calificacion" required="required" class="mt-3">
+                        <option value="terror">Terror</option>
+                    </select>
+                </label>
+            </div>
+            <div class="row">
+                <label for="precioDia" class="col-6 pl-0">
+                    Precio por Día:
+                    <input type="number" name="precioDia" id="precioDia" placeholder="" required="required" />
+                </label>
+                <label for="multaDia" class="col-6 pl-15 pr-0   ">
+                    Multa por Día:
+                    <input type="number" name="multaDia" id="multaDia" placeholder="" required="required" />
+                </label>
+            </div>
+             <div class="row">
+                <label for="image" class="col pl-0">
+                    Imagen:
+                    <input type="file" accept="image/*" name="password" id="image" placeholder="" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" required="required" />
+                </label>
+            </div>
+           <div class="row">
+             <button type="submit">Actualizar</button>
+           </div>
+        </form>
+    </div>
+</div>
+<!--fin Modal Editar Pelicula-->
+
 <!-- end of footer section-->
 
 <script src="js/jquery.js"></script>
 <script src="js/plugins.js"></script>
 <script src="js/plugins2.js"></script>
 <script src="js/custom.js"></script>
-
 <script type="text/javascript" src="https://cdn.datatables.net/v/bs4-4.1.1/dt-1.10.22/datatables.min.js"></script>
+
 <script>	
 $(document).ready( function () {
     $('#pelis').DataTable({

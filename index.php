@@ -90,14 +90,12 @@
 			<div class="col-md-12 col-sm-12 col-xs-12">
 				<div class="topbar-filter fw">
 					<p>Se encontro <span>1 Peliculas</span> en total</p>
-					<label>Sort by:</label>
+					<label>Ordenar por:</label>
 					<select>
-						<option value="popularity">Popularity Descending</option>
-						<option value="popularity">Popularity Ascending</option>
-						<option value="rating">Rating Descending</option>
-						<option value="rating">Rating Ascending</option>
-						<option value="date">Release date Descending</option>
-						<option value="date">Release date Ascending</option>
+						<option value="popularity">Popularidad Descendente</option>
+						<option value="popularity">Popularidad Ascendente</option>
+						<option value="date">Fecha de lanzamiento Descendente</option>
+						<option value="date">Fecha de lanzamiento ascendente</option>
 					</select>
 					<a href="movielist.html" class="list"><i class="ion-ios-list-outline "></i></a>
 					<a  href="moviegridfw.html" class="grid"><i class="ion-grid active"></i></a>
@@ -106,7 +104,7 @@
 						<div class="movie-item-style-2 movie-item-style-1">
 							<img src="images/uploads/mv1.jpg" alt="">
 							<div class="hvr-inner">
-							<a  href="#" class="btn signupLink"> Read more <i class="ion-android-arrow-dropright"></i> </a>
+							<a  href="#" class="btn signupLink"> Detalles<i class="ion-android-arrow-dropright"></i> </a>
 	            			</div>
 							<div class="mv-item-infor">
 								<h6><a href="#">oblivion</a></h6>
