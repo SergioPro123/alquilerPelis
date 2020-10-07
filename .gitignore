@@ -1,0 +1,4 @@
+!uploads/images/
+
+uploads/images/*.png
+uploads/images/*.jpg

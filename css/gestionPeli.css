@@ -6832,7 +6832,8 @@ p.ceb-single {
         margin-bottom: 15px;
     }
 }
-.overlay .login-content label input {
+.overlay .login-content label input,
+textarea {
     font-family: 'Dosis', sans-serif;
     font-size: 14px;
     color: #222222;

@@ -438,42 +438,39 @@ $(function () {
         },
     });
     //==js for login and sign up
-    var loginLink = $('.loginLink');
-    var signupLink = $('.signupLink');
 
-    var loginct = $('#login-content');
-    var signupct = $('#signup-content');
     var loginWrap = $('.login-wrapper');
     var modalAnadirPelicula = $('#modalAnadirPelicula');
     var modalEditarPelicula = $('#modalEditarPelicula');
     var modalEliminarPelicula = $('#modalEliminarPelicula');
+    var modalDetallesPelicula = $('#modalDetallesPelicula');
 
     var overlay = $('.overlay');
     loginWrap.each(function () {
         $(this).wrap('<div class="overlay"></div>');
     });
-    //pop up for signup form
-    signupLink.on('click', function (event) {
+
+    //Modal Detalles Pelicula (index.php)
+    $('.detallesPelicula').on('click', function (event) {
+        console.log('object');
         event.preventDefault();
-        signupct.parents(overlay).addClass('openform');
+        modalDetallesPelicula.parents(overlay).addClass('openform');
         $(document).on('click', function (e) {
             var target = $(e.target);
             if ($(target).hasClass('overlay')) {
                 $(target)
-                    .find(signupct)
+                    .find(modalDetallesPelicula)
                     .each(function () {
                         $(this).removeClass('openform');
                     });
                 setTimeout(function () {
                     $(target).removeClass('openform');
-                }, 350);
+                }, 100);
             }
         });
     });
-
     //Modal Añadir Pelicula
     $('#anadirPelicula').on('click', function (event) {
-        console.log('okkk');
         event.preventDefault();
         modalAnadirPelicula.parents(overlay).addClass('openform');
         $(document).on('click', function (e) {
@@ -486,14 +483,33 @@ $(function () {
                     });
                 setTimeout(function () {
                     $(target).removeClass('openform');
-                }, 350);
+                }, 100);
             }
         });
     });
     //Modal Editar Pelicula
     $('a[href="editarPelicula"]').on('click', function (event) {
-        console.log('okkk');
         event.preventDefault();
+        let id = $(this).parent().parent().attr('id');
+        $('input[name="idPeliculaEditar"]').css('display', 'block');
+        $('input[name="idPeliculaEditar"]').val(id);
+        $('input[name="idPeliculaEditar"]').css('display', 'none');
+
+        let dataEditar = Array();
+        $(`tr#${id}`)
+            .children('td')
+            .each(function (index) {
+                if (index == 7) return;
+                dataEditar[index] = $(this).text();
+            });
+        $('input#nombreEditar').val(dataEditar[0]);
+        $('input#calificacionEditar').val(Number(dataEditar[6]));
+        $('textarea#descripcionEditar').val(dataEditar[2]);
+        $('input#anioEditar').val(Number(dataEditar[3]));
+        $('input#precioDiaEditar').val(Number(dataEditar[4]));
+        $('input#multaDiaEditar').val(Number(dataEditar[5]));
+        $('select#categoriaEditar').val(dataEditar[1]);
+
         modalEditarPelicula.parents(overlay).addClass('openform');
         $(document).on('click', function (e) {
             var target = $(e.target);
@@ -505,14 +521,18 @@ $(function () {
                     });
                 setTimeout(function () {
                     $(target).removeClass('openform');
-                }, 350);
+                }, 100);
             }
         });
     });
     //Modal Eliminar Pelicula
     $('a[href="eliminarPelicula"]').on('click', function (event) {
-        console.log('okkk');
         event.preventDefault();
+        let id = $(this).parent().parent().attr('id');
+        $('input[name="idPelicula"]').css('display', 'block');
+        $('input[name="idPelicula"]').val(id);
+        $('input[name="idPelicula"]').css('display', 'none');
+
         modalEliminarPelicula.parents(overlay).addClass('openform');
         $(document).on('click', function (e) {
             var target = $(e.target);
@@ -524,7 +544,7 @@ $(function () {
                     });
                 setTimeout(function () {
                     $(target).removeClass('openform');
-                }, 350);
+                }, 100);
             }
         });
     });

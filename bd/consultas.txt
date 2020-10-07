@@ -7,3 +7,5 @@ CALL selectPeliculas();
 CALL updatePelicula(idPelicula, nombre, descripcion, calificacion, categoria, precioDia, multaDia, anioDia);
 
 CALL incrementarAlquilerPelicula(4);
+
+CALL getTiposCategorias();

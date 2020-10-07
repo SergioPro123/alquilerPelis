@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 07-10-2020 a las 19:15:44
+-- Tiempo de generación: 08-10-2020 a las 00:21:44
 -- Versión del servidor: 10.4.13-MariaDB
 -- Versión de PHP: 7.2.32
 
@@ -70,6 +70,13 @@ BEGIN
     END IF;    
 END$$
 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `getTiposCategorias` ()  NO SQL
+BEGIN
+
+	SELECT categoria.categoria FROM categoria;
+
+END$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `incrementarAlquilerPelicula` (IN `idPeliculaVariable` INT(11))  NO SQL
 BEGIN
 	UPDATE pelicula SET pelicula.numeroAlquilados = pelicula.numeroAlquilados + 1 WHERE pelicula.id_pelicula = idPeliculaVariable;
@@ -91,13 +98,14 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `selectPeliculas` ()  NO SQL
 BEGIN
     SELECT 
         id_pelicula,
+        nombre,
         categoria,
+        descripcion,
+        anio,
         precioDia,
         multaDia,
-        anio,
-        nombre,
-        descripcion,
-        calificacion
+        calificacion,
+        pathImage
     FROM
         pelicula a
     INNER JOIN anio b ON a.id_anio = b.id_anio
@@ -186,9 +194,8 @@ CREATE TABLE `pelicula` (
 --
 
 INSERT INTO `pelicula` (`id_pelicula`, `id_categoria`, `id_preciosDia`, `id_anio`, `nombre`, `descripcion`, `numeroAlquilados`, `calificacion`, `pathImage`) VALUES
-(3, 6, 2, 3, 'Pelicula de Prueba 2', 'Esta es una descripcion', 1, 7, 'images/peliculas/prueba.jpg'),
-(4, 3, 3, 1, 'EXITO ACTUALIZADO', 'DESCRIPCION ACTUALIZADA', 2, 2, 'images/peliculas/prueba.jpg'),
-(6, 2, 2, 5, 'EXITO 2', 'DESCRIPCION', 2, 10, 'images/peliculas/prueba.jpg');
+(12, 4, 9, 1, 'MI EXITO', 'GENIAL', 0, 10, 'uploads/images/898253070-imagenes-buenos-dias-snoopy-7.jpg'),
+(13, 2, 10, 5, 'exito 2', 'No hay', 0, 1, 'uploads/images/2103507220-señaletica-11.jpg');
 
 -- --------------------------------------------------------
 
@@ -212,7 +219,11 @@ INSERT INTO `preciosdia` (`id_precioDia`, `precioDia`, `multaDia`) VALUES
 (3, 9000, 11000),
 (4, 5000, 8000),
 (5, 7500, 7500),
-(6, 1000, 1500);
+(6, 1000, 1500),
+(7, 500, 600),
+(8, 6000, 6000),
+(9, 10000, 15000),
+(10, 1500, 5000);
 
 --
 -- Índices para tablas volcadas
@@ -265,13 +276,13 @@ ALTER TABLE `categoria`
 -- AUTO_INCREMENT de la tabla `pelicula`
 --
 ALTER TABLE `pelicula`
-  MODIFY `id_pelicula` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_pelicula` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `preciosdia`
 --
 ALTER TABLE `preciosdia`
-  MODIFY `id_precioDia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_precioDia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- Restricciones para tablas volcadas

@@ -20,6 +20,12 @@
 
 </head>
 <body>
+<?php
+
+require_once ("php/script_gestionPelis.php");
+$peliculas = new misPelis();
+$datos = $peliculas->consultarPelis();
+?>
 <!--preloading-->
 <div id="preloader">
     <img class="logo" src="images/logo1.png" alt="" width="119" height="58">
@@ -29,44 +35,7 @@
     </div>
 </div>
 <!--end of preloading-->
-<!--signup form popup-->
-<div class="login-wrapper"  id="signup-content">
-    <div class="login-content">
-        <a href="#" class="close">x</a>
-        <h3>sign up</h3>
-        <form method="post" action="#">
-            <div class="row">
-                 <label for="username-2">
-                    Username:
-                    <input type="text" name="username" id="username-2" placeholder="Hugh Jackman" pattern="^[a-zA-Z][a-zA-Z0-9-_\.]{8,20}$" required="required" />
-                </label>
-            </div>
-           
-            <div class="row">
-                <label for="email-2">
-                    your email:
-                    <input type="password" name="email" id="email-2" placeholder="" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" required="required" />
-                </label>
-            </div>
-             <div class="row">
-                <label for="password-2">
-                    Password:
-                    <input type="password" name="password" id="password-2" placeholder="" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" required="required" />
-                </label>
-            </div>
-             <div class="row">
-                <label for="repassword-2">
-                    re-type Password:
-                    <input type="password" name="password" id="repassword-2" placeholder="" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" required="required" />
-                </label>
-            </div>
-           <div class="row">
-             <button type="submit">sign up</button>
-           </div>
-        </form>
-    </div>
-</div>
-<!--end of signup form popup-->
+
 
 <div class="hero common-hero">
 	<div class="container">
@@ -89,7 +58,7 @@
 		<div class="row">
 			<div class="col-md-12 col-sm-12 col-xs-12">
 				<div class="topbar-filter fw">
-					<p>Se encontro <span>1 Peliculas</span> en total</p>
+					<p>Se encontro <span><?= count($datos)?> Peliculas</span> en total</p>
 					<label>Ordenar por:</label>
 					<select>
 						<option value="popularity">Popularidad Descendente</option>
@@ -138,6 +107,46 @@
 		</div>
 	</div>
 </footer>
+
+
+<!--Modal Detalles Pelicula-->
+<div class="login-wrapper"  id="modalDetallesPelicula">
+    <div class="login-content">
+        <a href="#" class="close">x</a>
+        <h3>Detalles de Pelicula</h3>
+        <form method="post" action="#">
+            <div class="row">
+                 <label for="username-2">
+                    Username:
+                    <input type="text" name="username" id="username-2" placeholder="Hugh Jackman" pattern="^[a-zA-Z][a-zA-Z0-9-_\.]{8,20}$" required="required" />
+                </label>
+            </div>
+           
+            <div class="row">
+                <label for="email-2">
+                    your email:
+                    <input type="password" name="email" id="email-2" placeholder="" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" required="required" />
+                </label>
+            </div>
+             <div class="row">
+                <label for="password-2">
+                    Password:
+                    <input type="password" name="password" id="password-2" placeholder="" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" required="required" />
+                </label>
+            </div>
+             <div class="row">
+                <label for="repassword-2">
+                    re-type Password:
+                    <input type="password" name="password" id="repassword-2" placeholder="" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" required="required" />
+                </label>
+            </div>
+           <div class="row">
+             <button type="submit">sign up</button>
+           </div>
+        </form>
+    </div>
+</div>
+<!--end of Modal Detalles Pelicula-->
 <!-- end of footer section-->
 
 <script src="js/jquery.js"></script>
@@ -146,20 +155,39 @@
 <script src="js/custom.js"></script>
 <script src="lib/js/pagination.min.js"></script>
 <script>
+	var dataPeliculaPHP = Array();
+</script>
+<?php 
 
-var templatePelicula =  "<div class='movie-item-style-2 movie-item-style-1' >"+
-						"<img src='images/uploads/mv1.jpg' alt=''>"+
-						"<div class='hvr-inner'>"+
-						"<a  href='#' class='btn signupLink'> Detalles<i class='ion-android-arrow-dropright'></i> </a>"+
+for($i = 0;$i<count($datos);$i++){
+	?>
+<script>
+	 dataPeliculaPHP[Number("<?= $i ?>")] = Array();
+</script>
+<?php 
+	for($j = 0; $j<=8; $j++){
+?>
+<script>
+	dataPeliculaPHP[Number("<?= $i ?>")][Number("<?= $j ?>")] = "<?= $datos[$i][$j] ?>";
+</script>
+<?php }} ?>
+
+<script>
+
+var dataPelicula = [];
+console.log(dataPeliculaPHP);
+for(let i=0; i<dataPeliculaPHP.length; i++){
+	
+	dataPelicula[i]="<div class='movie-item-style-2 movie-item-style-1' >"+
+						`<img src='${dataPeliculaPHP[i][8]}' alt=''>`+
+						"<div class='hvr-inner detallesPelicula' >"+
+						"<a  href='#' class='btn' > Detalles<i class='ion-android-arrow-dropright'></i> </a>"+
 	            		"</div>"+
 						"<div class='mv-item-infor'>"+
-						"<h6><a href='#'>oblivion</a></h6>"+
-						"<p class='rate'><i class='ion-android-star'></i><span>8.1</span> /10</p>"+
+						`<h6><a href='#' >${dataPeliculaPHP[i][1]}</a></h6>`+
+						`<p class='rate'><i class='ion-android-star'></i><span>${dataPeliculaPHP[i][7]}</span> /10</p>`+
 						"</div>"+
 						"</div>";
-var dataPelicula = [];
-for(let i=0; i<35; i++){
-	dataPelicula[i]=templatePelicula;
 }	
 
 $('#pagination-container').pagination({

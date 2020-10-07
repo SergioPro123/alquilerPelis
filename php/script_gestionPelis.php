@@ -1,47 +1,70 @@
 <?php 
  
-class misPelis(){
+class misPelis{
     
     private $newConn;
     public function __construct(){ 
-        require_once "classConnectionMySQL.php";
+        require_once ("classConnectionMySQL.php");
         // Creamos una nueva instancia
         $this->newConn = new ConnectionMySQL();
         // Creamos una nueva conexion
         $this->newConn->CreateConnection();
-
     }
     
     //////////////////////////////
-    // INSERTAR
+    // INSERTAR Pelicula
     //////////////////////////////
-    pubilc function insertarPelis(){
-        $query="INSERT INTO users(id, first_name, last_name, email, password) VALUES (DEFAULT,'Rafael','Rojas','alguncorreo@gmail.com','21232f297a57a5a743894a0e4a801fc3')";
+    public function insertarPelis($nombre,$descripcion,$calificacion,$pathImage,$categoria,$precioDia,$multaDia,$anio){
+        $query="CALL insertPelicula('$nombre', '$descripcion',$calificacion,'$pathImage','$categoria',$precioDia,$multaDia,$anio);";
         $result=$this->newConn->ExecuteQuery($query);
             if($result){
                 $RowCount =  $this->newConn->GetCountAffectedRows();
                 if($RowCount > 0){
-                    echo "Query ejecutado exitosamente<BR>";
+                    //echo "Query ejecutado exitosamente<BR>";
                 }
             }else{
-                echo "<h3>Error ejecutando la consulta</h3>";
+               // echo "<h3>Error ejecutando la consulta</h3>";
         }   
     }
     //////////////////////////////
-    // CONSULTAR
+    // CONSULTAR Peliculas
     //////////////////////////////
-    pubilc function consultarPelis(){
-        $query="SELECT * FROM users WHERE first_name LIKE 'Rafael'";
+    public function consultarPelis(){
+        $query="CALL selectPeliculas()";
         $result = $this->newConn->ExecuteQuery($query);
+        $result_array = array();
         if($result){
-        
+            $i = 0;
             while($row=$this->newConn->GetRows($result)){
-        
-                echo "El usuario es:".$row[1]." ".$row[2]." ".$row[3];
-        
+                
+                for($j = 0; $j<=8; $j++){
+                    $result_array[$i][$j] = $row[$j];
+                }
+                $i++;
             }
             
-            $this->newConn->SetFreeResult($result);
+            return $result_array;
+        
+        }else{
+            echo "<h3>Error generando la consulta</h3>";
+        }
+    }
+    //////////////////////////////
+    // CONSULTAR Categorias de Peliculas
+    //////////////////////////////
+    public function getTiposCategorias(){
+        $query="CALL getTiposCategorias();";
+        $result = $this->newConn->ExecuteQuery($query);
+        $result_array = array();
+        if($result){
+            $i = 0;
+            while($row=$this->newConn->GetRows($result)){
+                
+                $result_array[$i] = $row[0];
+                $i++;
+            }
+            
+            return $result_array;
         
         }else{
             echo "<h3>Error generando la consulta</h3>";
@@ -52,33 +75,32 @@ class misPelis(){
     ////////////////////////////////
     // UPDATE
     ////////////////////////////////
-    pubilc function actualizarPelis(){
-        $query="UPDATE users SET first_name='Pepe' WHERE first_name='Rafael'";
-        $result=$this->newConn->ExecuteQuery("$query");
-        if($result){
-            if($result>0){
-                echo "Registro actualizado correctamente";
-            }
-        
-        }
-        else{
-                echo "<h3>Error ejecutando la consulta</h3>";
+    public function updatePelicula($idPelicula, $nombre, $descripcion, $calificacion, $categoria, $precioDia, $multaDia, $anio){
+        $query="CALL updatePelicula('$idPelicula','$nombre', '$descripcion',$calificacion,'$categoria',$precioDia,$multaDia,$anio);";
+        $result=$this->newConn->ExecuteQuery($query);
+            if($result){
+                $RowCount =  $this->newConn->GetCountAffectedRows();
+                if($RowCount > 0){
+                    //echo "Query ejecutado exitosamente<BR>";
+                }
+            }else{
+               // echo "<h3>Error ejecutando la consulta</h3>";
         }
     }
     ///////////////////////////////
-    // ELIMINAR
+    // ELIMINAR Pelicula
     ///////////////////////////////
-    pubilc function eliminarPelis(){
-        $query="DELETE FROM users WHERE first_name='Pepe'";
+    public function eliminarPelis($idPelicula){
+        $query="CALL deletePelicula($idPelicula);";
         $result=$this->newConn->ExecuteQuery($query);
         if($result){
             $RowCount=$this->newConn->GetCountAffectedRows();
             if($RowCount>0){
-                echo "Eliminado exitosamente";
+               // echo "Eliminado exitosamente";    
             }
         }
         else{
-                echo "<h3>Error ejecutando la consulta</h3>";
+               // echo "<h3>Error ejecutando la consulta</h3>";
         }   
     }    
     
