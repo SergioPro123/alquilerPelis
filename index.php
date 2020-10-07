@@ -100,8 +100,10 @@
 					<a href="movielist.html" class="list"><i class="ion-ios-list-outline "></i></a>
 					<a  href="moviegridfw.html" class="grid"><i class="ion-grid active"></i></a>
 				</div>
-				<div class="flex-wrap-movielist mv-grid-fw">
-						<div class="movie-item-style-2 movie-item-style-1">
+
+				<div class="flex-wrap-movielist mv-grid-fw" id="contenedorPelis">
+					<?php for($j = 0; $j<30; $j++){ ?>
+						<div class="movie-item-style-2 movie-item-style-1" id="<?php  echo "pelicula-".$j ?>">
 							<img src="images/uploads/mv1.jpg" alt="">
 							<div class="hvr-inner">
 							<a  href="#" class="btn signupLink"> Detalles<i class="ion-android-arrow-dropright"></i> </a>
@@ -110,25 +112,19 @@
 								<h6><a href="#">oblivion</a></h6>
 								<p class="rate"><i class="ion-android-star"></i><span>8.1</span> /10</p>
 							</div>
-						</div>		
+						</div>	
+				<?php } ?>
+					
 				</div>		
+
+
 				<div class="topbar-filter">
 					<label>Peliculas por pagina:</label>
 					<select>
 						<option value="range">24 Peliculas</option>
 						<option value="saab">12 Peliculas</option>
 					</select>
-					
-					<div class="pagination2">
-						<span>Pag 1 de 2:</span>
-						<a class="active" href="#">1</a>
-						<a href="#">2</a>
-						<a href="#">3</a>
-						<a href="#">...</a>
-						<a href="#">78</a>
-						<a href="#">79</a>
-						<a href="#"><i class="ion-arrow-right-b"></i></a>
-					</div>
+					<div id="pagination-container" class="pagination2"></div>
 				</div>
 			</div>
 		</div>
@@ -148,6 +144,36 @@
 <script src="js/plugins.js"></script>
 <script src="js/plugins2.js"></script>
 <script src="js/custom.js"></script>
+<script src="lib/js/pagination.min.js"></script>
+<script>
+
+var templatePelicula =  "<div class='movie-item-style-2 movie-item-style-1' >"+
+						"<img src='images/uploads/mv1.jpg' alt=''>"+
+						"<div class='hvr-inner'>"+
+						"<a  href='#' class='btn signupLink'> Detalles<i class='ion-android-arrow-dropright'></i> </a>"+
+	            		"</div>"+
+						"<div class='mv-item-infor'>"+
+						"<h6><a href='#'>oblivion</a></h6>"+
+						"<p class='rate'><i class='ion-android-star'></i><span>8.1</span> /10</p>"+
+						"</div>"+
+						"</div>";
+var dataPelicula = [];
+for(let i=0; i<35; i++){
+	dataPelicula[i]=templatePelicula;
+}	
+
+$('#pagination-container').pagination({
+	dataSource:dataPelicula,
+	pageSize:12,
+    callback: function(data, pagination) {
+        // template method of yourself
+        var html = data;
+        $('#contenedorPelis').html(html);
+    }
+});
+
+</script>
+
 
 </body>
 
