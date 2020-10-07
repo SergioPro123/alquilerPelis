@@ -69,7 +69,8 @@
 						<tr class="">
 							<th>Nombre</th>
 							<th>Categoria</th>
-							<th>Precio Dia</th>
+							<th>Descripción</th>
+							<th>Año</th>
 							<th>Precio Dia</th>
 							<th>Multa Dia</th>
 							<th>Calificación</th>
@@ -87,6 +88,7 @@
 							<td>Prueba 123</td>
 							<td>Prueba 123</td>
 							<td>Prueba 123</td>
+                            <td>Prueba 123</td>
 							<td >
 							<a href='editarPelicula' class='edit' data-toggle='modal'><i
 										class='material-icons' data-toggle='tooltip' title='Editar'>&#xE254;</i></a>
@@ -228,12 +230,6 @@
                 <label for="multaDia" class="col-6 pl-15 pr-0   ">
                     Multa por Día:
                     <input type="number" name="multaDia" id="multaDia" placeholder="" required="required" />
-                </label>
-            </div>
-             <div class="row">
-                <label for="image" class="col pl-0">
-                    Imagen:
-                    <input type="file" accept="image/*" name="password" id="image" placeholder="" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" required="required" />
                 </label>
             </div>
            <div class="row">

@@ -1,0 +1,9 @@
+CALL insertPelicula("Pelicula de Prueba", "Esta es una descripcion", 7,"images/peliculas/prueba.jpg","Terror",5000,7500,2020);	
+
+CALL deletePelicula(id);
+
+CALL selectPeliculas();
+
+CALL updatePelicula(idPelicula, nombre, descripcion, calificacion, categoria, precioDia, multaDia, anioDia);
+
+CALL incrementarAlquilerPelicula(4);
