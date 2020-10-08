@@ -16,6 +16,8 @@
 
 	<!-- CSS files -->
 	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="lib/bootstrap/bootstrap.min.css">
+
 
 
 </head>
@@ -66,8 +68,6 @@ $datos = $peliculas->consultarPelis();
 						<option value="date">Fecha de lanzamiento Descendente</option>
 						<option value="date">Fecha de lanzamiento ascendente</option>
 					</select>
-					<a href="movielist.html" class="list"><i class="ion-ios-list-outline "></i></a>
-					<a  href="moviegridfw.html" class="grid"><i class="ion-grid active"></i></a>
 				</div>
 
 				<div class="flex-wrap-movielist mv-grid-fw" id="contenedorPelis">
@@ -108,41 +108,124 @@ $datos = $peliculas->consultarPelis();
 	</div>
 </footer>
 
-
+<!-- Modal DETALLES DE FACTURA -->
+<div class="login-wrapper"  id="modalFacturaPelicula" >
+    <div class="login-content" style="width: 500px;">
+        <a href="#" class="close">x</a>
+        <h3 class="m-0 mb-5">Precios</h3>
+        <form method="post" action="index.php">
+            <div class="row mt-3">
+				<div class="col">
+					<label  class="mb-0" >Precio Por Día</label>
+				</div>
+				<div class="col">
+					<p class="mt-0 mb-0">
+						$ 5000
+					</p>
+				</div>
+			</div>
+			<div class="row mt-3">
+				<div class="col">
+					<label  class="mb-0 " >Multa Por Día</label>
+				</div>
+				<div class="col">
+					<p class="mt-0 mb-0">
+						$ 6.000
+					</p>
+				</div>
+			</div>
+			<div class="row mt-3">
+				<div class="col">
+					<label  class="mb-0 " >Precio Total</label>
+				</div>
+				<div class="col">
+					<p class="mt-0 mb-0">
+						$ 10.000
+					</p>
+				</div>
+			</div>
+			
+           <div class="row mt-5">
+             <button type="submit">Aceptar</button>
+           </div>
+        </form>
+    </div>
+</div>
+<!-- FIN Modal DETALLES DE FACTURA -->
 <!--Modal Detalles Pelicula-->
-<div class="login-wrapper"  id="modalDetallesPelicula">
+<div class="login-wrapper m-2"  id="modalDetallesPelicula">
     <div class="login-content">
         <a href="#" class="close">x</a>
-        <h3>Detalles de Pelicula</h3>
         <form method="post" action="#">
-            <div class="row">
-                 <label for="username-2">
-                    Username:
-                    <input type="text" name="username" id="username-2" placeholder="Hugh Jackman" pattern="^[a-zA-Z][a-zA-Z0-9-_\.]{8,20}$" required="required" />
-                </label>
+            
+			<div class="row">
+				<div class="col">
+					<img src="uploads/images/898253070-imagenes-buenos-dias-snoopy-7.jpg">
+				</div>
+
+				<div class="col">
+					<div class="row">
+						<div class="col">
+							<h3 style="margin-bottom: 20px;" id="nombre">Flash</h3>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col">
+						<label class="mb-0">Descripción</label>
+								<p class="mt-0" id="descripcion">
+									Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos repellat perferendis velit nihil possimus similique quae harum eos aliquam? Accusantium aspernatur deserunt, praesentium voluptates maiores facilis. Consectetur magni odio ad.
+								</p>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col">
+							<label  class="mb-0" >Categoria</label>
+							<p class="mt-0" id="categoria">
+								Terror
+							</p>
+						</div>
+						<div class="col">
+							<label  class="mb-0" >Calificación</label>
+								<p class="mt-0" id="calificacion">
+									8 Puntos
+								</p>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col">
+							<label  class="mb-0" >Precio por Día</label>
+							<p class="mt-0" id="precioDia">
+								6.000
+							</p>
+						</div>
+						<div class="col">
+							<label  class="mb-0" >Multa por Día</label>
+								<p class="mt-0" id="multaDia">
+									8.000
+								</p>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col">
+							<label  class="mb-0" >Cantidad de Visitas</label>
+							<p class="mt-0" id="numeroAlquilados">
+								6.000
+							</p>
+						</div>
+						<div class="col">
+							<label  class="mb-0" id="multaDia">Cantidad de Dias
+								<input type="number" min="1" value="1" id="dias" >
+							</label>
+								
+						</div>
+					</div>
+					<div class="row">
+						<div class="col">
+						<button type="submit" id="facturaPelicula" style="margin-top: 13px;">Alquilar Pelicula</button>
+						</div>
+					</div>
+				</div>
             </div>
-           
-            <div class="row">
-                <label for="email-2">
-                    your email:
-                    <input type="password" name="email" id="email-2" placeholder="" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" required="required" />
-                </label>
-            </div>
-             <div class="row">
-                <label for="password-2">
-                    Password:
-                    <input type="password" name="password" id="password-2" placeholder="" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" required="required" />
-                </label>
-            </div>
-             <div class="row">
-                <label for="repassword-2">
-                    re-type Password:
-                    <input type="password" name="password" id="repassword-2" placeholder="" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" required="required" />
-                </label>
-            </div>
-           <div class="row">
-             <button type="submit">sign up</button>
-           </div>
         </form>
     </div>
 </div>

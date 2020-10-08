@@ -444,6 +444,7 @@ $(function () {
     var modalEditarPelicula = $('#modalEditarPelicula');
     var modalEliminarPelicula = $('#modalEliminarPelicula');
     var modalDetallesPelicula = $('#modalDetallesPelicula');
+    var modalFacturaPelicula = $('#modalFacturaPelicula');
 
     var overlay = $('.overlay');
     loginWrap.each(function () {
@@ -451,12 +452,31 @@ $(function () {
     });
 
     //Modal Detalles Pelicula (index.php)
+    $('#facturaPelicula').on('click', function (event) {
+        event.preventDefault();
+        $('#modalDetallesPelicula').parent().removeClass('openform');
+        modalFacturaPelicula.parents(overlay).addClass('openform');
+        $(document).on('click', function (e) {
+            var target = $(e.target);
+            if ($(target).hasClass('overlay')) {
+                $(target)
+                    .find(modalFacturaPelicula)
+                    .each(function () {
+                        $(this).removeClass('openform');
+                    });
+                setTimeout(function () {
+                    $(target).removeClass('openform');
+                }, 100);
+            }
+        });
+    });
+    //Modal Detalles Pelicula (index.php)
     $('.detallesPelicula').on('click', function (event) {
-        console.log('object');
         event.preventDefault();
         modalDetallesPelicula.parents(overlay).addClass('openform');
         $(document).on('click', function (e) {
             var target = $(e.target);
+            console.log(target);
             if ($(target).hasClass('overlay')) {
                 $(target)
                     .find(modalDetallesPelicula)

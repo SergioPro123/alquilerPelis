@@ -4131,7 +4131,7 @@ ul {
     }
 }
 .movie-item-style-2 .mv-item-infor h6 {
-    margin-bottom: 10px;
+    margin-bottom: 0px;
 }
 .movie-item-style-2 .mv-item-infor h6 a {
     font-family: 'Dosis', sans-serif;
@@ -4188,6 +4188,7 @@ ul {
 .movie-item-style-1 img {
     margin-right: 0;
     margin-bottom: 15px;
+    height: 200px;
 }
 .movie-item-style-1 .hvr-inner {
     position: absolute;
@@ -4214,7 +4215,6 @@ ul {
 }
 @media (max-width: 991px) {
     .movie-item-style-1 .hvr-inner {
-        margin-left: 0;
     }
 }
 .movie-item-style-1 .hvr-inner a {
@@ -4453,7 +4453,7 @@ ul {
     color: #dcf836;
 }
 .topbar-filter .pagination2 {
-    padding-left: 100px;
+    margin-right: 250px;
 }
 @media (max-width: 767px) {
     .topbar-filter .pagination2 {
@@ -6770,7 +6770,7 @@ p.ceb-single {
     }
 }
 .overlay .login-content {
-    width: 430px;
+    width: 800px;
     padding: 50px;
     border: 1px solid #e1e1e1;
     height: auto;
@@ -6847,7 +6847,7 @@ p.ceb-single {
     font-weight: bold;
     text-transform: capitalize;
     margin-top: 10px;
-    height: 42px;
+    height: 25px;
     border: 1px solid #e1e1e1;
 }
 .overlay .login-content label input::-webkit-input-placeholder {
@@ -6872,7 +6872,7 @@ p.ceb-single {
 .overlay .login-content p {
     color: #222222;
     margin-top: 35px;
-    margin-bottom: 20px;
+    margin-bottom: 16px;
 }
 @media (max-width: 767px) {
     .overlay .login-content p {
