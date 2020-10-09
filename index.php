@@ -171,7 +171,7 @@ $datos = $peliculas->consultarPelis();
         <form method="post" action="#">
             
 			<div class="row">
-				<div class="col">
+				<div class="col" style="height: 500.8px;">
 					<img src="uploads/images/898253070-imagenes-buenos-dias-snoopy-7.jpg" id="imagen" style="height: 100%;">
 				</div>
 
