@@ -113,13 +113,23 @@ $datos = $peliculas->consultarPelis();
     <div class="login-content" style="width: 500px;">
         <a href="#" class="close">x</a>
         <h3 class="m-0 mb-5">Precios</h3>
-        <form method="post" action="index.php">
+        <form method="post" action="php/peliculasMetodos.php">
             <div class="row mt-3">
 				<div class="col">
-					<label  class="mb-0" >Precio Por Día</label>
+					<label  class="mb-0">Dias a Alquilar</label>
 				</div>
 				<div class="col">
-					<p class="mt-0 mb-0">
+					<p class="mt-0 mb-0"  id="diasFactura">
+						12 Dias
+					</p>
+				</div>
+			</div>
+			<div class="row mt-3">
+				<div class="col">
+					<label  class="mb-0">Precio Por Día</label>
+				</div>
+				<div class="col">
+					<p class="mt-0 mb-0"  id="precioDiaFactura">
 						$ 5000
 					</p>
 				</div>
@@ -129,7 +139,7 @@ $datos = $peliculas->consultarPelis();
 					<label  class="mb-0 " >Multa Por Día</label>
 				</div>
 				<div class="col">
-					<p class="mt-0 mb-0">
+					<p class="mt-0 mb-0" id="multaDiaFactura">
 						$ 6.000
 					</p>
 				</div>
@@ -139,14 +149,16 @@ $datos = $peliculas->consultarPelis();
 					<label  class="mb-0 " >Precio Total</label>
 				</div>
 				<div class="col">
-					<p class="mt-0 mb-0">
+				<strong>
+					<p class="mt-0 mb-0" id="precioTotalFactura">
 						$ 10.000
 					</p>
+				</strong>
 				</div>
 			</div>
-			
+			<input type="text" name="idPelicula" style="display:none" value="">
            <div class="row mt-5">
-             <button type="submit">Aceptar</button>
+             <button type="submit" name="alquilar">Aceptar</button>
            </div>
         </form>
     </div>
@@ -160,7 +172,7 @@ $datos = $peliculas->consultarPelis();
             
 			<div class="row">
 				<div class="col">
-					<img src="uploads/images/898253070-imagenes-buenos-dias-snoopy-7.jpg">
+					<img src="uploads/images/898253070-imagenes-buenos-dias-snoopy-7.jpg" id="imagen" style="height: 100%;">
 				</div>
 
 				<div class="col">
@@ -172,7 +184,7 @@ $datos = $peliculas->consultarPelis();
 					<div class="row">
 						<div class="col">
 						<label class="mb-0">Descripción</label>
-								<p class="mt-0" id="descripcion">
+								<p class="mt-0" id="descripcion" style="height: 120px;">
 									Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos repellat perferendis velit nihil possimus similique quae harum eos aliquam? Accusantium aspernatur deserunt, praesentium voluptates maiores facilis. Consectetur magni odio ad.
 								</p>
 						</div>
@@ -221,7 +233,7 @@ $datos = $peliculas->consultarPelis();
 					</div>
 					<div class="row">
 						<div class="col">
-						<button type="submit" id="facturaPelicula" style="margin-top: 13px;">Alquilar Pelicula</button>
+						<button type="submit" class="facturaPelicula" id="" style="margin-top: 13px;">Alquilar Pelicula</button>
 						</div>
 					</div>
 				</div>
@@ -235,7 +247,6 @@ $datos = $peliculas->consultarPelis();
 <script src="js/jquery.js"></script>
 <script src="js/plugins.js"></script>
 <script src="js/plugins2.js"></script>
-<script src="js/custom.js"></script>
 <script src="lib/js/pagination.min.js"></script>
 <script>
 	var dataPeliculaPHP = Array();
@@ -245,30 +256,30 @@ $datos = $peliculas->consultarPelis();
 for($i = 0;$i<count($datos);$i++){
 	?>
 <script>
-	 dataPeliculaPHP[Number("<?= $i ?>")] = Array();
+	 dataPeliculaPHP["id-"+Number("<?= $datos[$i][0] ?>")] = Array();
 </script>
 <?php 
-	for($j = 0; $j<=8; $j++){
+	for($j = 0; $j<=9; $j++){
 ?>
 <script>
-	dataPeliculaPHP[Number("<?= $i ?>")][Number("<?= $j ?>")] = "<?= $datos[$i][$j] ?>";
+	dataPeliculaPHP["id-"+Number("<?= $datos[$i][0] ?>")][Number("<?= $j ?>")] = "<?= $datos[$i][$j] ?>";
 </script>
 <?php }} ?>
+<script src="js/custom.js"></script>
 
 <script>
 
 var dataPelicula = [];
-console.log(dataPeliculaPHP);
-for(let i=0; i<dataPeliculaPHP.length; i++){
+for(let i=0; i<Object.keys(dataPeliculaPHP).length; i++){
 	
 	dataPelicula[i]="<div class='movie-item-style-2 movie-item-style-1' >"+
-						`<img src='${dataPeliculaPHP[i][8]}' alt=''>`+
-						"<div class='hvr-inner detallesPelicula' >"+
-						"<a  href='#' class='btn' > Detalles<i class='ion-android-arrow-dropright'></i> </a>"+
+						`<img src='${dataPeliculaPHP[Object.keys(dataPeliculaPHP)[i]][8]}' alt=''>`+
+						`<div class='hvr-inner detallesPelicula' id="id-${dataPeliculaPHP[Object.keys(dataPeliculaPHP)[i]][0]}" >`+
+						`<a  href='#' class='btn'  > Detalles<i class='ion-android-arrow-dropright'></i> </a>`+
 	            		"</div>"+
 						"<div class='mv-item-infor'>"+
-						`<h6><a href='#' >${dataPeliculaPHP[i][1]}</a></h6>`+
-						`<p class='rate'><i class='ion-android-star'></i><span>${dataPeliculaPHP[i][7]}</span> /10</p>`+
+						`<h6><a href='#' >${dataPeliculaPHP[Object.keys(dataPeliculaPHP)[i]][1]}</a></h6>`+
+						`<p class='rate'><i class='ion-android-star'></i><span>${dataPeliculaPHP[Object.keys(dataPeliculaPHP)[i]][7]}</span> /10</p>`+
 						"</div>"+
 						"</div>";
 }	

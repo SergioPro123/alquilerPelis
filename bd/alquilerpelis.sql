@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 08-10-2020 a las 00:21:44
+-- Tiempo de generación: 09-10-2020 a las 18:16:32
 -- Versión del servidor: 10.4.13-MariaDB
 -- Versión de PHP: 7.2.32
 
@@ -105,7 +105,8 @@ BEGIN
         precioDia,
         multaDia,
         calificacion,
-        pathImage
+        pathImage,
+        numeroAlquilados
     FROM
         pelicula a
     INNER JOIN anio b ON a.id_anio = b.id_anio
@@ -139,6 +140,10 @@ CREATE TABLE `anio` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
+-- RELACIONES PARA LA TABLA `anio`:
+--
+
+--
 -- Volcado de datos para la tabla `anio`
 --
 
@@ -159,6 +164,10 @@ CREATE TABLE `categoria` (
   `id_categoria` int(11) NOT NULL,
   `categoria` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- RELACIONES PARA LA TABLA `categoria`:
+--
 
 --
 -- Volcado de datos para la tabla `categoria`
@@ -190,12 +199,24 @@ CREATE TABLE `pelicula` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
+-- RELACIONES PARA LA TABLA `pelicula`:
+--   `id_categoria`
+--       `categoria` -> `id_categoria`
+--   `id_anio`
+--       `anio` -> `id_anio`
+--   `id_preciosDia`
+--       `preciosdia` -> `id_precioDia`
+--
+
+--
 -- Volcado de datos para la tabla `pelicula`
 --
 
 INSERT INTO `pelicula` (`id_pelicula`, `id_categoria`, `id_preciosDia`, `id_anio`, `nombre`, `descripcion`, `numeroAlquilados`, `calificacion`, `pathImage`) VALUES
-(12, 4, 9, 1, 'MI EXITO', 'GENIAL', 0, 10, 'uploads/images/898253070-imagenes-buenos-dias-snoopy-7.jpg'),
-(13, 2, 10, 5, 'exito 2', 'No hay', 0, 1, 'uploads/images/2103507220-señaletica-11.jpg');
+(12, 4, 9, 1, 'MI EXITO', 'GENIAL', 4, 10, 'uploads/images/898253070-imagenes-buenos-dias-snoopy-7.jpg'),
+(13, 2, 10, 5, 'exito 2', 'No hay', 2, 1, 'uploads/images/2103507220-señaletica-11.jpg'),
+(14, 4, 11, 1, 'Programa Terminado', 'Esta es una descripcion.', 0, 10, 'uploads/images/1175530746-62824.jpg'),
+(15, 2, 12, 5, 'Lo que sea', 'Prueba Terminada', 0, 8, 'uploads/images/1504452342-joker.jfif');
 
 -- --------------------------------------------------------
 
@@ -208,6 +229,10 @@ CREATE TABLE `preciosdia` (
   `precioDia` int(11) NOT NULL,
   `multaDia` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- RELACIONES PARA LA TABLA `preciosdia`:
+--
 
 --
 -- Volcado de datos para la tabla `preciosdia`
@@ -223,7 +248,9 @@ INSERT INTO `preciosdia` (`id_precioDia`, `precioDia`, `multaDia`) VALUES
 (7, 500, 600),
 (8, 6000, 6000),
 (9, 10000, 15000),
-(10, 1500, 5000);
+(10, 1500, 5000),
+(11, 99000, 150000),
+(12, 16000, 20000);
 
 --
 -- Índices para tablas volcadas
@@ -276,13 +303,13 @@ ALTER TABLE `categoria`
 -- AUTO_INCREMENT de la tabla `pelicula`
 --
 ALTER TABLE `pelicula`
-  MODIFY `id_pelicula` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id_pelicula` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT de la tabla `preciosdia`
 --
 ALTER TABLE `preciosdia`
-  MODIFY `id_precioDia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_precioDia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- Restricciones para tablas volcadas

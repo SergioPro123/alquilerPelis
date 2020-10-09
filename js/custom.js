@@ -451,9 +451,25 @@ $(function () {
         $(this).wrap('<div class="overlay"></div>');
     });
 
-    //Modal Detalles Pelicula (index.php)
-    $('#facturaPelicula').on('click', function (event) {
+    //Modal Factura Pelicula (index.php)
+    $('.facturaPelicula').on('click', function (event) {
         event.preventDefault();
+        let id = $(this).attr('id');
+        $('#diasFactura').text($('input#dias').val());
+        let dias = $('#diasFactura').text();
+        let precioDia = parseFloat(dataPeliculaPHP[id][5]);
+        let multaDia = parseFloat(dataPeliculaPHP[id][6]);
+        let precioTotal = precioDia * dias;
+
+        $('#diasFactura').text(dias + ' Dias');
+        $('#precioDiaFactura').text('$ ' + precioDia);
+        $('#multaDiaFactura').text('$ ' + multaDia);
+        $('#precioTotalFactura').text('$ ' + precioTotal);
+
+        $('input[name="idPelicula"]').css('display', 'block');
+        $('input[name="idPelicula"]').val(id.replace('id-', ''));
+        $('input[name="idPelicula"]').css('display', 'none');
+
         $('#modalDetallesPelicula').parent().removeClass('openform');
         modalFacturaPelicula.parents(overlay).addClass('openform');
         $(document).on('click', function (e) {
@@ -473,10 +489,21 @@ $(function () {
     //Modal Detalles Pelicula (index.php)
     $('.detallesPelicula').on('click', function (event) {
         event.preventDefault();
+        let id = $(this).attr('id');
+
+        //Rellenamos los nombres en el modal
+        $('#nombre').text(dataPeliculaPHP[id][1]);
+        $('#descripcion').text(dataPeliculaPHP[id][3]);
+        $('#categoria').text(dataPeliculaPHP[id][2]);
+        $('#calificacion').text(dataPeliculaPHP[id][7] + ' Puntos');
+        $('#precioDia').text('$ ' + dataPeliculaPHP[id][5]);
+        $('#multaDia').text('$ ' + dataPeliculaPHP[id][6]);
+        $('img#imagen').attr('src', dataPeliculaPHP[id][8]);
+        $('#numeroAlquilados').text(dataPeliculaPHP[id][9]);
+        $('button.facturaPelicula').attr('id', id);
         modalDetallesPelicula.parents(overlay).addClass('openform');
         $(document).on('click', function (e) {
             var target = $(e.target);
-            console.log(target);
             if ($(target).hasClass('overlay')) {
                 $(target)
                     .find(modalDetallesPelicula)
@@ -529,7 +556,6 @@ $(function () {
         $('input#precioDiaEditar').val(Number(dataEditar[4]));
         $('input#multaDiaEditar').val(Number(dataEditar[5]));
         $('select#categoriaEditar').val(dataEditar[1]);
-
         modalEditarPelicula.parents(overlay).addClass('openform');
         $(document).on('click', function (e) {
             var target = $(e.target);

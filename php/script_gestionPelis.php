@@ -37,7 +37,7 @@ class misPelis{
             $i = 0;
             while($row=$this->newConn->GetRows($result)){
                 
-                for($j = 0; $j<=8; $j++){
+                for($j = 0; $j<=9; $j++){
                     $result_array[$i][$j] = $row[$j];
                 }
                 $i++;
@@ -103,7 +103,23 @@ class misPelis{
                // echo "<h3>Error ejecutando la consulta</h3>";
         }   
     }    
-    
+
+    ////////////////////////////////
+    // UPDATE el numero de alquiler de una pelicula
+    ////////////////////////////////
+    public function alquilerPelicula($idPelicula){
+        $query="CALL incrementarAlquilerPelicula($idPelicula);";
+        $result=$this->newConn->ExecuteQuery($query);
+            if($result){
+                $RowCount =  $this->newConn->GetCountAffectedRows();
+                if($RowCount > 0){
+                    //echo "Query ejecutado exitosamente<BR>";
+                }
+            }else{
+               // echo "<h3>Error ejecutando la consulta</h3>";
+        }
+    }
+
     ///////////////////////////////
     // Cerramos conexion a base de datos
     ///////////////////////////////
