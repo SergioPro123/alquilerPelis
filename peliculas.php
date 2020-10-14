@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <head>
 	<!-- Basic need -->
-	<title>Open Pediatrics</title>
+	<title>Gestionar Peliculas</title>
 	<meta charset="UTF-8">
 	<meta name="description" content="">
 	<meta name="keywords" content="">
